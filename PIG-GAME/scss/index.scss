@@ -1,3 +1,9 @@
+@use 'sass:color';
+
+
+$card-width: 500px;
+$card-height: 600px;
+
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +19,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     gap: 20px;
     height: 100%;
 }
@@ -42,7 +49,7 @@ body {
 
     &:focus {
         outline: 1px solid black;
-        outline-offset: 5px;
+        outline-offset: 10px;
         outline-style: dashed;
     }
 
@@ -55,8 +62,8 @@ body {
 }
 
 .card {
-    width: 500px;
-    height: 600px;
+    width: $card-width;
+    height: $card-height;
     background: darken($color: rgba(255, 255, 255, 0.212), $amount: 20%);
     outline: 1px solid darkblue;
     border-radius: 1rem;
@@ -90,7 +97,7 @@ body {
         filter: blur(0px);
         & .current__wrapper{
             background: lighten(#acc8e54b,60%);
-            color: lighten(#112A46,10%);
+            color: lighten($color: #112A46, $amount: 10%);
         }
     }
 
@@ -112,3 +119,19 @@ body {
     color: #112A46;
 }
 
+.roll__dice,.hold__dice{
+
+    color: black;
+    border: 1px solid black;
+    outline-offset: 20px;
+    width: 50%;
+    max-width: $card-width;
+
+}
+.controlls__wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    margin-top: 50px;
+}

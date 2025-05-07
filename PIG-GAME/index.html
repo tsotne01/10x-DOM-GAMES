@@ -14,23 +14,24 @@
             <button role="button" class="new__game button" aria-label="start new game">New Game</button>
             <div class="card active">
                 <h2 class="player__name">Player 1</h2>
-                <span class="player__score player1">0</span>
+                <span class="player__score player1" aria-live="polite">0</span>
                 <div class="current__wrapper">
                     <p class="current__text">Current</p>
-                    <span class="current__score score">0</span>
+                    <span class="current__score score aria-live="polite"">0</span>
                 </div>
             </div>
             <div class="card">
                 <h2 class="player__name">Player 2</h2>
-                <span class="player__score player2">0</span>
+                <span class="player__score player2" aria-live="polite">0</span>
                 <div class="current__wrapper">
                     <p class="current__text">Current</p>
-                    <span class="current__score score">0</span>
+                    <span class="current__score score" aria-live="polite">0</span>
                 </div>
             </div>
         </section>
-        <section>
-
+        <section class="controlls__wrapper">
+            <button class="button roll__dice" role="button" aria-label="roll dice">ROLL Dice</button>
+            <button class="button hold__dice" role="button" aria-label="hold dice">HOLD Dice</button>
         </section>
     </main>
     <script src="./js/game.js"></script>
