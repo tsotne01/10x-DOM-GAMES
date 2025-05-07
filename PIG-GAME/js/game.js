@@ -9,41 +9,85 @@ const currentScorePlayer1 = currentScores[0];
 const currentScorePlayer2 = currentScores[1];
 const cards = Array.from(document.querySelectorAll(".card"));
 
+let accumulated = 0;
+
 const player1 = {
     currentScore: 0,
+    active: true,
 }
 const player2 = {
     currentScore: 0,
+    active: false
 }
 let currentDiceNum = -1;
 
-function generateDiceNum(min,max){
+function generateDiceNum(min = 1, max = 6) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function switchPlayers(){
+function switchPlayers() {
     console.log(cards)
-    cards.map((card)=>{
+    cards.map((card) => {
         card.classList.toggle("active")
     })
-}
-
-
-function updateUI(){
-    currentDiceSpan.textContent = currentDiceNum;
-    player1Score.textContent = "0";
-    player2Score.textContent = "0";
+    player1.active = !player1.active
+    player2.active = !player2.active
     currentScorePlayer1.textContent = "0";
     currentScorePlayer2.textContent = "0";
+    accumulated = 0;
+    updateUI();
+
 }
 
 
-function handleNewGameButtonClick(){
+function updateUI() {
+    currentDiceSpan.textContent = currentDiceNum;
+    if (player1.active) {
+        player1Score.textContent = player1.currentScore;
+        currentScorePlayer1.textContent = accumulated;
+        return
+    }
+    player2Score.textContent = player2.currentScore;
+    currentScorePlayer2.textContent = accumulated;
+}
+
+
+function handleNewGameButtonClick() {
     currentDiceNum = "";
     player1.currentScore = 0;
     player2.currentScore = 0;
+    cards[0].classList.add("active");
+    cards[1].classList.remove("active");
+    player1Score.textContent = "0";
+    currentScorePlayer1.textContent = "0";
+    player2Score.textContent = "0";
+    currentScorePlayer2.textContent = "0";
+    accumulated = 0;
     updateUI();
 }
 
-
-newGameButton.addEventListener("click",handleNewGameButtonClick);
+function handleRollButtonClick() {
+    currentDiceNum = generateDiceNum();
+    if (currentDiceNum === 1) {
+        accumulated = 0;
+        updateUI();
+        switchPlayers();
+        return;
+    }
+    accumulated += currentDiceNum;
+    updateUI();
+}
+function handleHoldButtonClick() {
+    if (player1.active) {
+        player1.currentScore += accumulated;
+        updateUI();
+        switchPlayers();
+        return;
+    }
+    player2.currentScore += accumulated;
+    updateUI();
+    switchPlayers();
+}
+holdButton.addEventListener("click", handleHoldButtonClick)
+rollButton.addEventListener("click", handleRollButtonClick);
+newGameButton.addEventListener("click", handleNewGameButtonClick);
