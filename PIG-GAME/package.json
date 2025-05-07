@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
  "scripts": {
-    "compile:sass": "sass scss/main.scss css/style.css",
+    "compile:sass": "sass scss/index.scss css/index.css",
     "watch:sass": "sass --watch scss/index.scss css/index.css",
-    "build:css": "sass scss/main.scss css/style.css --style=compressed"
+    "build:css": "sass scss/index.scss css/index.css --style=compressed"
   },
   "keywords": [],
   "author": "",
