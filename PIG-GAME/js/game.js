@@ -19,7 +19,7 @@ const player2 = {
     currentScore: 0,
     active: false
 }
-let currentDiceNum = -1;
+let currentDiceNum = 0;
 
 function generateDiceNum(min = 1, max = 6) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -32,8 +32,6 @@ function switchPlayers() {
     })
     player1.active = !player1.active
     player2.active = !player2.active
-    currentScorePlayer1.textContent = "0";
-    currentScorePlayer2.textContent = "0";
     accumulated = 0;
     updateUI();
 
@@ -42,17 +40,21 @@ function switchPlayers() {
 
 function updateUI() {
     currentDiceSpan.textContent = currentDiceNum;
+
     if (player1.active) {
         player1Score.textContent = player1.currentScore;
         currentScorePlayer1.textContent = accumulated;
         return
     }
+
     player2Score.textContent = player2.currentScore;
     currentScorePlayer2.textContent = accumulated;
 }
 
 
 function handleNewGameButtonClick() {
+    rollButton.removeAttribute("disabled");
+    holdButton.removeAttribute("disabled");
     currentDiceNum = "";
     player1.currentScore = 0;
     player2.currentScore = 0;
@@ -62,6 +64,8 @@ function handleNewGameButtonClick() {
     currentScorePlayer1.textContent = "0";
     player2Score.textContent = "0";
     currentScorePlayer2.textContent = "0";
+    player1.active = true;
+    player2.active = false;
     accumulated = 0;
     updateUI();
 }
@@ -77,17 +81,40 @@ function handleRollButtonClick() {
     accumulated += currentDiceNum;
     updateUI();
 }
+
 function handleHoldButtonClick() {
+
     if (player1.active) {
         player1.currentScore += accumulated;
+        accumulated = 0;
         updateUI();
         switchPlayers();
         return;
     }
+
     player2.currentScore += accumulated;
+    accumulated = 0;
+
+    if (player1.currentScore >= 100) {
+        console.log("Winner is : player1");
+    }
+
+    if (player2.currentScore >= 100) {
+        console.log("Winner is : player2");
+    }
+
+    if (currentDiceNum === 0) {
+        switchPlayers();
+        return;
+    };
+
+
     updateUI();
     switchPlayers();
 }
+
 holdButton.addEventListener("click", handleHoldButtonClick)
+
 rollButton.addEventListener("click", handleRollButtonClick);
+
 newGameButton.addEventListener("click", handleNewGameButtonClick);
