@@ -29,7 +29,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 150px;
 }
 
 .button {
@@ -119,6 +119,7 @@ body {
     color: #112A46;
 }
 
+
 .roll__dice,.hold__dice{
 
     color: black;
@@ -134,4 +135,13 @@ body {
     justify-content: center;
     gap: 70px;
     margin-top: 50px;
+}
+
+.current__dice-num{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    font-weight: bold;
+    font-size: 64px;
+    transform: translateX(-50%);
 }
