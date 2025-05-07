@@ -1,3 +1,114 @@
-body{
-    height: 100vh;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    height: 100vh;
+    background:oklch(50.8% 0.118 165.612);
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.game__container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.button {
+    border: none;
+    background: rgba(255, 255, 255, 0.521);
+    padding: 15px 40px;
+    border-radius: 0.5em;
+    border: 1px solid white;
+    font-size: large;
+    color: oklch(20.8% 0.042 265.755);
+    transition: all ease 0.3s;
+    font-weight: bold;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:focus {
+        outline: 1px solid black;
+        outline-offset: 5px;
+        outline-style: dashed;
+    }
+
+    &.new__game {
+        position: absolute;
+        right: 50%;
+        top: -15%;
+        transform: translateX(50%);
+    }
+}
+
+.card {
+    width: 500px;
+    height: 600px;
+    background: darken($color: rgba(255, 255, 255, 0.212), $amount: 20%);
+    outline: 1px solid darkblue;
+    border-radius: 1rem;
+    backdrop-filter: blur(0.5px);
+    transition: all ease 0.5s;
+    filter: blur(1px);
+    & .current__wrapper{
+        width: 120px;
+        margin: 120px auto;
+        backdrop-filter: blur(20px);
+        border-radius: 1em;
+        padding: 1rem 10rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: darken(#112A46,50%);
+    }
+    & .current__text{
+        font-weight: bold;
+        text-align: center;
+        letter-spacing: 2px;
+        font-size: 36px;
+    }
+    &.active {
+        outline-offset: 15px;
+        outline: 1px solid white;
+        outline-style: dashed;
+        background: lighten($color: rgba(255, 255, 255, 0.212), $amount: 20%);
+
+        filter: blur(0px);
+        & .current__wrapper{
+            background: lighten(#acc8e54b,60%);
+            color: lighten(#112A46,10%);
+        }
+    }
+
+    // box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.411);
+}
+
+.player__name,.player__score{
+    margin-top: 50px;
+
+}
+
+.player__name,
+.player__score,
+.current__score {
+    display: block;
+    text-align: center;
+    font-size: 64px;
+    font-weight: bolder;
+    color: #112A46;
+}
+

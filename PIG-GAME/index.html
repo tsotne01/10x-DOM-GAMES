@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PIG GAME</title>
     <link rel="stylesheet" href="./css/index.css">
 </head>
-<body>
-    <main>
 
+<body>
+    <main class="wrapper">
+        <section class="game__container">
+            <button role="button" class="new__game button" aria-label="start new game">New Game</button>
+            <div class="card active">
+                <h2 class="player__name">Player 1</h2>
+                <span class="player__score player1">0</span>
+                <div class="current__wrapper">
+                    <p class="current__text">Current</p>
+                    <span class="current__score score">0</span>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="player__name">Player 2</h2>
+                <span class="player__score player2">0</span>
+                <div class="current__wrapper">
+                    <p class="current__text">Current</p>
+                    <span class="current__score score">0</span>
+                </div>
+            </div>
+        </section>
+        <section>
+
+        </section>
     </main>
     <script src="./js/game.js"></script>
 </body>
+
 </html>
