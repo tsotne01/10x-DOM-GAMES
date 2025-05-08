@@ -39,6 +39,19 @@ function switchPlayers() {
 
 
 function updateUI() {
+    if (player1.currentScore >= 100) {
+        holdButton.removeEventListener("click", handleHoldButtonClick)
+        rollButton.removeEventListener("click", handleRollButtonClick);
+        setWinner(player1)
+        return;
+    }
+    if (player2.currentScore >= 100) {
+        holdButton.removeEventListener("click", handleHoldButtonClick)
+        rollButton.removeEventListener("click", handleRollButtonClick);
+        setWinner(player2)
+        return;
+    }
+
     currentDiceSpan.textContent = currentDiceNum;
 
     if (player1.active) {
@@ -47,8 +60,11 @@ function updateUI() {
         return
     }
 
-    player2Score.textContent = player2.currentScore;
-    currentScorePlayer2.textContent = accumulated;
+    if (player2.active) {
+        player2Score.textContent = player2.currentScore;
+        currentScorePlayer2.textContent = accumulated;
+        return;
+    }
 }
 
 
@@ -67,10 +83,27 @@ function handleNewGameButtonClick() {
     player1.active = true;
     player2.active = false;
     accumulated = 0;
+    holdButton.addEventListener("click", handleHoldButtonClick)
+    rollButton.addEventListener("click", handleRollButtonClick);
     updateUI();
 }
 
+function setWinner(player) {
+    if (player === player1) {
+        cards[0].classList.add("active");
+        cards[1].classList.remove("active");
+        player1Score.textContent = player1.currentScore + accumulated;
+        currentDiceSpan.textContent = "Player 1 Won"
+        return;
+    }
+    cards[1].classList.add("active")
+    cards[0].classList.remove("active");
+    player2Score.textContent = player2.currentScore + accumulated;
+    currentDiceSpan.textContent = "Player 2 Won"
+}
+
 function handleRollButtonClick() {
+    
     currentDiceNum = generateDiceNum();
     if (currentDiceNum === 1) {
         accumulated = 0;
@@ -83,8 +116,7 @@ function handleRollButtonClick() {
 }
 
 function handleHoldButtonClick() {
-
-    if (player1.active) {
+    if (player1.active && player1.currentScore < 100) {
         player1.currentScore += accumulated;
         accumulated = 0;
         updateUI();
@@ -92,25 +124,18 @@ function handleHoldButtonClick() {
         return;
     }
 
-    player2.currentScore += accumulated;
-    accumulated = 0;
-
-    if (player1.currentScore >= 100) {
-        console.log("Winner is : player1");
-    }
-
-    if (player2.currentScore >= 100) {
-        console.log("Winner is : player2");
+    if (player2.active && player2.currentScore < 100) {
+        player2.currentScore += accumulated;
+        accumulated = 0;
+        updateUI();
+        switchPlayers();
+        return;
     }
 
     if (currentDiceNum === 0) {
         switchPlayers();
         return;
     };
-
-
-    updateUI();
-    switchPlayers();
 }
 
 holdButton.addEventListener("click", handleHoldButtonClick)
