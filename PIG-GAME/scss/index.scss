@@ -1,5 +1,4 @@
-@use 'sass:color';
-
+@use "sass:color";
 
 $card-width: 500px;
 $card-height: 600px;
@@ -12,7 +11,7 @@ $card-height: 600px;
 
 body {
     height: 100vh;
-    background:oklch(50.8% 0.118 165.612);
+    background: oklch(50.8% 0.118 165.612);
 }
 
 .wrapper {
@@ -70,7 +69,7 @@ body {
     backdrop-filter: blur(0.5px);
     transition: all ease 0.5s;
     filter: blur(1px);
-    & .current__wrapper{
+    & .current__wrapper {
         width: 120px;
         margin: 120px auto;
         backdrop-filter: blur(20px);
@@ -80,9 +79,9 @@ body {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        color: darken(#112A46,50%);
+        color: darken(#112a46, 50%);
     }
-    & .current__text{
+    & .current__text {
         font-weight: bold;
         text-align: center;
         letter-spacing: 2px;
@@ -95,18 +94,18 @@ body {
         background: lighten($color: rgba(255, 255, 255, 0.212), $amount: 20%);
 
         filter: blur(0px);
-        & .current__wrapper{
-            background: lighten(#acc8e54b,60%);
-            color: lighten($color: #112A46, $amount: 10%);
+        & .current__wrapper {
+            background: lighten(#acc8e54b, 60%);
+            color: lighten($color: #112a46, $amount: 10%);
         }
     }
 
     // box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.411);
 }
 
-.player__name,.player__score{
+.player__name,
+.player__score {
     margin-top: 50px;
-
 }
 
 .player__name,
@@ -116,20 +115,18 @@ body {
     text-align: center;
     font-size: 64px;
     font-weight: bolder;
-    color: #112A46;
+    color: #112a46;
 }
 
-
-.roll__dice,.hold__dice{
-
+.roll__dice,
+.hold__dice {
     color: black;
     border: 1px solid black;
     outline-offset: 20px;
     width: 50%;
     max-width: $card-width;
-
 }
-.controlls__wrapper{
+.controlls__wrapper {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -137,11 +134,12 @@ body {
     margin-top: 50px;
 }
 
-.current__dice-num{
+.current__dice-num {
     position: absolute;
     top: 40%;
     left: 50%;
     font-weight: bold;
     font-size: 64px;
     transform: translateX(-50%);
+    z-index: 9999;
 }
