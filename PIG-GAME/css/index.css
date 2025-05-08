@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: #1b283b;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.game__container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 150px;
+}
+
+.button {
+  border: none;
+  background: rgba(255, 255, 255, 0.521);
+  padding: 15px 40px;
+  border-radius: 0.5em;
+  border: 1px solid white;
+  font-size: large;
+  color: oklch(20.8% 0.042 265.755deg);
+  transition: all ease 0.3s;
+  font-weight: bold;
+}
+.button:hover {
+  cursor: pointer;
+}
+.button:focus {
+  outline: 1px solid black;
+  outline-offset: 10px;
+  outline-style: dashed;
+}
+.button.new__game {
+  position: absolute;
+  right: 50%;
+  top: -15%;
+  transform: translateX(50%);
+}
+
+.card {
+  width: 500px;
+  height: 600px;
+  background: rgba(204, 204, 204, 0.212);
+  outline: 1px solid darkblue;
+  border-radius: 1rem;
+  backdrop-filter: blur(0.5px);
+  transition: all ease 0.5s;
+  filter: blur(1px);
+}
+.card .current__wrapper {
+  width: 120px;
+  margin: 120px auto;
+  backdrop-filter: blur(20px);
+  border-radius: 1em;
+  padding: 1rem 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: black;
+}
+.card .current__text {
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 36px;
+}
+.card.active {
+  outline-offset: 15px;
+  outline: 1px solid white;
+  outline-style: dashed;
+  background: rgba(255, 255, 255, 0.212);
+  filter: blur(0px);
+}
+.card.active .current__wrapper {
+  background: rgba(255, 255, 255, 0.2941176471);
+  color: rgb(26.9655172414, 66.6206896552, 111.0344827586);
+}
+
+.player__name,
+.player__score {
+  margin-top: 50px;
+}
+
+.player__name,
+.player__score,
+.current__score {
+  display: block;
+  text-align: center;
+  font-size: 64px;
+  font-weight: bolder;
+  color: #112a46;
+}
+
+.roll__dice,
+.hold__dice {
+  color: black;
+  border: 1px solid black;
+  outline-offset: 20px;
+  width: 50%;
+  max-width: 500px;
+}
+
+.controlls__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  margin-top: 50px;
+}
+
+.current__dice-num {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  font-weight: bold;
+  font-size: 64px;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+/*# sourceMappingURL=index.css.map */
