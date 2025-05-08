@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess My Number!</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="game-header">
+        <button class="again-button button" id="againButton" aria-label="Start a new game">Again!</button>
+        <div class="game-range" aria-label="Game range">&lt;Between 1 and 20&gt;</div>
+    </header>
+    
+    <main class="game-container">
+        <h1 class="game-title">Guess My Number!</h1>
+        
+        <div class="number-display">
+            <span class="question-mark" id="secretNumber" aria-live="polite">?</span>
+        </div>
+        
+        <div class="game-interface">
+            <section class="game-controls">
+                <input type="number" id="guessInput" class="guess-input" min="1" max="20" placeholder="?" aria-label="Enter your guess">
+                <button class="check-button button" id="checkButton" aria-label="Check your guess">Check!</button>
+            </section>
+            
+            <section class="game-feedback">
+                <div class="message-display">
+                    <span class="message" id="gameMessage" aria-live="polite">Start Guessing...</span>
+                </div>
+                
+                <div class="score-container">
+                    <p class="score-item">
+                        <span class="score-label">Score:</span>
+                        <span class="score-value current-score" id="currentScore">0</span>
+                    </p>
+                    <p class="score-item">
+                        <span class="score-label">Highest Score:</span>
+                        <span class="score-value highest-score" id="highestScore">0</span>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer class="game-footer">
+        <p>Made with <span class="heart">♥</span> for indie game lovers</p>
+    </footer>
+    
+    <script src="./js/main.js"></script>
+</body>
+</html>

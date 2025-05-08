@@ -1,0 +1,400 @@
+$base-color: #4a6fa5;
+$dark-shade: darken($base-color, 30%);
+$darker-shade: darken($base-color, 40%);
+$light-shade: lighten($base-color, 30%);
+$lighter-shade: lighten($base-color, 40%);
+$accent-color: desaturate(complement($base-color), 10%);
+$score-highlight: lighten($base-color, 15%);
+$font-primary: 'Courier New', Courier, monospace;
+$font-secondary: 'VT323', monospace;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+$pixelated-border: 4px;
+$transition-speed: 0.2s;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $dark-shade;
+  color: $lighter-shade;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  font-family: $font-primary;
+  background-image: 
+    linear-gradient(to right, transparentize($darker-shade, 0.9) 1px, transparent 1px),
+    linear-gradient(to bottom, transparentize($darker-shade, 0.9) 1px, transparent 1px);
+  background-size: 20px 20px;
+  letter-spacing: 0.5px;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 3px solid $accent-color;
+  font-family: $font-secondary;
+
+  .game-range {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: $light-shade;
+    border: 2px solid $light-shade;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+.game-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+
+  .game-title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: $lighter-shade;
+    font-family: $font-secondary;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0px $darker-shade;
+    
+    @media (max-width: 480px) {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+.number-display {
+  background-color: $base-color;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  border: $pixelated-border solid $darker-shade;
+  position: relative;
+  clip-path: polygon(
+    0 0, 
+    100% 0, 
+    100% 70%, 
+    70% 100%, 
+    0 100%
+  );
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 50%;
+  }
+  
+  .question-mark {
+    text-align: center;
+    font-size: 5rem;
+    font-weight: bold;
+    color: $lighter-shade;
+    font-family: $font-secondary;
+    z-index: 1;
+    text-shadow: 3px 3px 0px $darker-shade;
+  }
+}
+
+.game-interface {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+  
+  .guess-input {
+    padding: 1rem;
+    font-size: 2rem;
+    border: $pixelated-border solid $darker-shade;
+    background-color: $light-shade;
+    text-align: center;
+    color: $darker-shade;
+    width: 100%;
+    font-family: $font-secondary;
+    
+    &:focus {
+      outline: none;
+      border-color: $accent-color;
+      box-shadow: 0 0 0 4px transparentize($accent-color, 0.7);
+    }
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    &[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    &::placeholder {
+      color: transparentize($darker-shade, 0.5);
+    }
+  }
+}
+
+.game-feedback {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  .message-display {
+    margin-bottom: 1.5rem;
+    
+    .message {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: block;
+      min-height: 60px;
+      text-align: center;
+      font-family: $font-secondary;
+      padding: 1rem;
+      border: 2px dashed $base-color;
+      background-color: transparentize($base-color, 0.9);
+    }
+  }
+  
+  .score-container {
+    background-color: $darker-shade;
+    padding: 1.5rem;
+    border-left: 8px solid $accent-color;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    .score-item {
+      font-size: 1.5rem;
+      font-family: $font-secondary;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .score-label {
+        color: $light-shade;
+      }
+      
+      .score-value {
+        font-weight: bold;
+        color: $darker-shade;
+        background-color: $light-shade;
+        padding: 0.3rem 0.8rem;
+        min-width: 3rem;
+        text-align: center;
+        border: 3px solid $darker-shade;
+      }
+    }
+    
+    .score-item:last-child {
+      border-top: 2px dashed $base-color;
+      padding-top: 1rem;
+      
+      .highest-score {
+        background-color: $accent-color;
+      }
+    }
+  }
+}
+
+.button {
+  background-color: $base-color;
+  color: $lighter-shade;
+  border: $pixelated-border solid $darker-shade;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-speed;
+  font-family: $font-secondary;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  
+  &:hover {
+    background-color: lighten($base-color, 10%);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    background-color: darken($base-color, 5%);
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 4px;
+    right: 4px;
+    height: 4px;
+    background-color: $darker-shade;
+    transition: all $transition-speed;
+  }
+  
+  &:active::after {
+    bottom: -2px;
+  }
+}
+
+.again-button {
+  background-color: transparentize($base-color, 0.7);
+  border-color: $base-color;
+  
+  &:hover {
+    background-color: transparentize($base-color, 0.6);
+  }
+}
+
+.check-button {
+  width: 100%;
+  background-color: $accent-color;
+  color: $darker-shade;
+  font-size: 1.5rem;
+  padding: 1rem;
+  
+  &:hover {
+    background-color: lighten($accent-color, 10%);
+  }
+  
+  &::after {
+    background-color: darken($accent-color, 20%);
+  }
+}
+
+.game-footer {
+  text-align: center;
+  padding: 1rem;
+  font-family: $font-secondary;
+  font-size: 1.2rem;
+  border-top: 2px solid $base-color;
+  margin-top: auto;
+  
+  .heart {
+    color: $accent-color;
+    animation: pulse 1.5s infinite;
+    display: inline-block;
+  }
+}
+
+body.correct {
+  background-color: desaturate(darken($base-color, 25%), 10%);
+  
+  .question-mark {
+    animation: bounce 0.5s infinite alternate;
+  }
+  
+  .number-display {
+    background-color: lighten($base-color, 20%);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  
+  .current-score, .highest-score {
+    animation: pulse-glow 1.5s infinite alternate;
+    transform: scale(1.1);
+  }
+}
+
+body.wrong {
+  .message {
+    color: $lighter-shade;
+    background-color: transparentize(darken($base-color, 15%), 0.7);
+    border-color: darken($base-color, 15%);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+:focus {
+  outline: 2px dashed $accent-color;
+  outline-offset: 3px;
+}
+
+.button, .guess-input, .message {
+  transition: all 0.15s ease-out;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.03) 51%,
+    transparent 52%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.3;
+}
